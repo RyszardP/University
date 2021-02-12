@@ -1,0 +1,31 @@
+package java_error_exceptions.classes;
+
+public enum Subject {
+    MATHEMATICS("Mathematics"),
+    PHYSICS("Physics"),
+    CHEMISTRY("Chemistry"),
+    THEORY_OF_MECHANICS("Theory of mechanics"),
+    STRUCTURAL_MECHANICS("Structural mechanics"),
+    HYDRODYNAMICS("Hydrodynamics"),
+    ELECTRICAL_ENGINEERING("Electrical engineering"),
+    DRAWING("Drawing"),
+    DESIGN_BASICS("Design basics");
+
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    Subject(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
+}
