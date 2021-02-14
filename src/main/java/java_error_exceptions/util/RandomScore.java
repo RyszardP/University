@@ -1,14 +1,23 @@
 package java_error_exceptions.util;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java_error_exceptions.classes.Student;
+
+import java.util.*;
 
 public class RandomScore {
     public static Random r = new Random();
     public static int randomScore = 4 + r.nextInt(10 - 4 + 1);
 
     public static List<Integer> randomScoresList = new ArrayList<Integer>();
+    public static List<Integer> randomScoreSet = new ArrayList<>();
+
+    public static List<Integer> fillRandomScoreList() {
+        for (int i = 0; i <= 10; i++) {
+            randomScoreSet.add(4 + r.nextInt(10 - 4 + 1));
+        }
+        return randomScoreSet;
+    }
+
 
     public static List<Integer> getListOfScores() {
         for (int i = 0; i < 20; i++) {
@@ -29,10 +38,14 @@ public class RandomScore {
     }
 
     public static void main(String[] args) {
-        System.out.println(randomScore);
+       // System.out.println(randomScore);
 
-        System.out.println(getListOfScores());
-        System.out.println(averageScore(randomScoresList));
+      //  System.out.println(getListOfScores());
+      //  System.out.println(averageScore(randomScoresList));
+Student student = new Student();
+
+
+        //System.out.println(student.setScoreList(fillRandomScoreList()));
     }
 
 

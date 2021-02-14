@@ -1,16 +1,18 @@
 package java_error_exceptions.classes;
 
 import java_error_exceptions.util.RandomNames;
-
+import java_error_exceptions.util.RandomScore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 
 public class Student {
     private String name;
     private String secondName;
-    private HashMap<Subject, Integer> subjectScoreSet = new HashMap<Subject, Integer>();
+    private List<Integer> scoreList;
+    private HashMap<Subject, Set<Integer>> subjectScoreSet = new HashMap<>();
     private List<Subject> subjectList = new ArrayList<Subject>();
 
     public Student() {
@@ -21,6 +23,12 @@ public class Student {
         this.secondName = secondName;
     }
 
+
+    public Student(String name, String secondName, List<Integer> scoreList) {
+        this.name = name;
+        this.secondName = secondName;
+        this.scoreList = scoreList;
+    }
 
     public String getName() {
         return name;
@@ -38,7 +46,7 @@ public class Student {
         this.secondName = secondName;
     }
 
-    public HashMap<Subject, Integer> getSubjectScoreSet() {
+    public HashMap<Subject, Set<Integer>> getSubjectScoreSet() {
         return subjectScoreSet;
     }
 
@@ -46,12 +54,24 @@ public class Student {
         return subjectList;
     }
 
-    public void setSubjectScoreSet(HashMap<Subject, Integer> subjectScoreSet) {
+    public void setSubjectScoreSet(HashMap<Subject, Set<Integer>> subjectScoreSet) {
         this.subjectScoreSet = subjectScoreSet;
     }
 
     public void setSubjectList(List<Subject> subjectList) {
         this.subjectList = subjectList;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjectList = subjects;
+    }
+
+    public List<Integer> getScoreList() {
+        return scoreList;
+    }
+
+    public void setScoreList(List<Integer> scoreList) {
+        this.scoreList = scoreList;
     }
 
     @Override
@@ -83,12 +103,14 @@ public class Student {
                 '}';
     }
 
-    public void setSubjects(List<Subject> subjects) {
-        this.subjectList = subjects;
-    }
 
     public static Student createStudent() {
-        Student student = new Student(RandomNames.getRandomName(), RandomNames.getRandomSecondName());
+        Student student = new Student(RandomNames.getRandomName(), RandomNames.getRandomSecondName(), RandomScore.fillRandomScoreList());
         return student;
     }
+
+    public static void main(String[] args) {
+        System.out.println(createStudent().getScoreList());
+    }
+
 }

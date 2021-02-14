@@ -1,6 +1,7 @@
 package java_error_exceptions.classes;
 
 import java_error_exceptions.exceptions.*;
+
 import java.util.List;
 
 public class University {
@@ -23,7 +24,7 @@ public class University {
     }
 
     public List<Faculty> getFaculties() throws UniversityDoesNotHaveFaculties {
-        if (faculties == null){
+        if (faculties == null) {
             throw new UniversityDoesNotHaveFaculties();
         }
         return faculties;
@@ -33,23 +34,45 @@ public class University {
         this.faculties = faculties;
     }
 
-    public void addStudent(Student student, Faculty faculty, Group group) throws UniversityDoesNotHaveFaculties,
+    public void addRandomStudent(Faculty faculty, Group group) throws UniversityDoesNotHaveFaculties,
             GroupDoesNotHaveStudent, StudentDoesNotHaveSubject, FacultyDoesNotHaveGroups {
         boolean isHasDepartment = getFaculties().contains(faculty);
         if ((faculty == null) && !isHasDepartment) {
             throw new UniversityDoesNotHaveFaculties();
         }
         assert faculty != null;
-        faculty.addStudent(student, group);
-        setStudentSubject();
+        faculty.addStudent(Student.createStudent(), group);
     }
 
+    public void addRandomStudentQuantity(Faculty faculty, Group group, int quantity) throws UniversityDoesNotHaveFaculties,
+            GroupDoesNotHaveStudent, StudentDoesNotHaveSubject, FacultyDoesNotHaveGroups {
+        boolean isHasDepartment = getFaculties().contains(faculty);
+        if ((faculty == null) && !isHasDepartment) {
+            throw new UniversityDoesNotHaveFaculties();
+        }
+        assert faculty != null;
+        for (int i = 0; i <= quantity; i++){
+            faculty.addStudent(Student.createStudent(), group);
+        }
+    }
+
+
     private void setStudentSubject() throws StudentDoesNotHaveSubject, FacultyDoesNotHaveGroups,
-            UniversityDoesNotHaveFaculties, GroupDoesNotHaveStudent{
-        for (Faculty faculty : getFaculties()){
-            for(Group group : faculty.getGroupList()){
+            UniversityDoesNotHaveFaculties, GroupDoesNotHaveStudent {
+        for (Faculty faculty : getFaculties()) {
+            for (Group group : faculty.getGroupList()) {
                 group.setStudentsSubject();
             }
         }
     }
+
+    private void getAllStudentsList() throws StudentDoesNotHaveSubject, FacultyDoesNotHaveGroups,
+            UniversityDoesNotHaveFaculties, GroupDoesNotHaveStudent {
+        for (Faculty faculty : getFaculties()) {
+            for (Group group : faculty.getGroupList()) {
+                System.out.println(group.getStudents());
+            }
+        }
+    }
+
 }
