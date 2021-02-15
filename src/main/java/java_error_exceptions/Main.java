@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws GroupDoesNotHaveStudent {
         University university = new University("Hogwarts");
         Faculty facultyGryffindor = new Faculty("Gryffindor");
         Faculty facultySlytherin = new Faculty("Slytherin");
@@ -36,24 +36,6 @@ public class Main {
             facultyHufflepuff.setGroupList(new ArrayList<>(Arrays.asList(firstHufflepuffGroup, secondHufflepuffGroup)));
             facultyRavenclaw.setGroupList(new ArrayList<>(Arrays.asList(firstRavenclawGroup, secondRavenclawGroup)));
 
-            firstGryffindorGroup.setSubjectsList(new ArrayList<>(Arrays.asList(Subject.CHEMISTRY,
-                    Subject.DESIGN_BASICS, Subject.DRAWING)));
-            secondGryffindorGroup.setSubjectsList(new ArrayList<>(Arrays.asList(Subject.PHYSICS, Subject.MATHEMATICS,
-                    Subject.STRUCTURAL_MECHANICS)));
-            firstSlytherinGroup.setSubjectsList(new ArrayList<>(Arrays.asList(Subject.ELECTRICAL_ENGINEERING,
-                    Subject.THEORY_OF_MECHANICS)));
-            secondSlytherinGroup.setSubjectsList(new ArrayList<>(Arrays.asList(Subject.ELECTRICAL_ENGINEERING,
-                    Subject.DRAWING, Subject.CHEMISTRY)));
-            firstHufflepuffGroup.setSubjectsList(new ArrayList<>(Arrays.asList(Subject.CHEMISTRY,
-                    Subject.DESIGN_BASICS, Subject.DRAWING)));
-            secondHufflepuffGroup.setSubjectsList(new ArrayList<>(Arrays.asList(Subject.CHEMISTRY,
-                    Subject.DESIGN_BASICS, Subject.DRAWING)));
-            firstRavenclawGroup.setSubjectsList(new ArrayList<>(Arrays.asList(Subject.ELECTRICAL_ENGINEERING,
-                    Subject.HYDRODYNAMICS)));
-            secondRavenclawGroup.setSubjectsList(new ArrayList<>(Arrays.asList(Subject.ELECTRICAL_ENGINEERING,
-                    Subject.DRAWING, Subject.HYDRODYNAMICS)));
-
-
             university.addRandomStudentQuantity(facultyGryffindor, firstGryffindorGroup, 20);
             university.addRandomStudentQuantity(facultyGryffindor, secondGryffindorGroup, 20);
             university.addRandomStudentQuantity(facultySlytherin, firstSlytherinGroup, 20);
@@ -69,17 +51,16 @@ public class Main {
         }
         //  return university;
         printStudents(university);
-
     }
 
-    public static void printStudents(University university) {
+    public static void printStudents(University university) throws GroupDoesNotHaveStudent {
         try {
             for (Faculty faculty : university.getFaculties()) {
                 for (Group group : faculty.getGroupList()) {
                     for (Student student : group.getStudents()) {
                         System.out.println("faculty title: " + faculty.getFacultyName() + ", Group name: " +
                                 group.getGroupName() + ", Student name and second name: " + student.getName() + " " +
-                                student.getSecondName() + ", Subjects: " + student.getSubjectList() +
+                                student.getSecondName() +
                                 ", Score list" + student.getScoreList());
                     }
                 }

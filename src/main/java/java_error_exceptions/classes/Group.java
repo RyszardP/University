@@ -1,15 +1,18 @@
 package java_error_exceptions.classes;
 
+import java_error_exceptions.exceptions.GroupDoesNotHaveStudent;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Group {
-    private ArrayList<Student> studentsList = new ArrayList<Student>();
-    private ArrayList<Subject> subjectsList = new ArrayList<Subject>();
-    public String groupName;
+    private List<Student> students;
+    private String groupName;
 
     public Group(String groupName) {
         this.groupName = groupName;
+        this.students = new ArrayList<>();
     }
 
     public String getGroupName() {
@@ -20,47 +23,41 @@ public class Group {
         this.groupName = groupName;
     }
 
-    public ArrayList<Student> getStudentsList() {
-        return studentsList;
+
+    public List<Student> getStudents() throws GroupDoesNotHaveStudent {
+        if (students.isEmpty()) {
+            throw new GroupDoesNotHaveStudent("The group " + getGroupName() + " is empty");
+        }
+        return students;
     }
 
-    public ArrayList<Subject> getSubjectList() {
-        return subjectsList;
+    public void setStudent(Student student) {
+        students.add(student);
     }
 
-    public List<Student> getStudents() {
-        return studentsList;
+    public void addRandomStudent() {
+        students.add(Student.createStudent());
     }
 
-    private List<Subject> getSubjects()  {
-        return subjectsList;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Group group = (Group) o;
+        return groupName.equals(group.groupName);
     }
 
-    public void setSubjectsList(List<Subject> subjects) {
-        this.subjectsList = subjectsList;
+    @Override
+    public int hashCode() {
+        return Objects.hash(groupName);
     }
 
     @Override
     public String toString() {
-        return "Group{" +
-                "studentsList=" + studentsList +
-                ", subjectsList=" + subjectsList +
-                ", groupName='" + groupName + '\'' +
-                '}';
-    }
-
-    public void addStudent(Student student) {
-        studentsList.add(student);
-    }
-
-    public void addRandomStudent() {
-        studentsList.add(Student.createStudent());
-    }
-
-    void setStudentsSubject()  {
-        for (Student studentI : getStudents()) {
-            studentI.setSubjects(getSubjects());
-        }
+        final StringBuilder sb = new StringBuilder("Group{");
+        sb.append("groupName='").append(groupName).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 
 

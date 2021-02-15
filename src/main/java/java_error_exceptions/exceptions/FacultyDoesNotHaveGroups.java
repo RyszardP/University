@@ -5,4 +5,6 @@ public class FacultyDoesNotHaveGroups extends Exception {
         super("Faculty must have group");
     }
 
+    public FacultyDoesNotHaveGroups(String s) {
+    }
 }

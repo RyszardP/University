@@ -24,7 +24,7 @@ public class University {
     }
 
     public List<Faculty> getFaculties() throws UniversityDoesNotHaveFaculties {
-        if (faculties == null) {
+        if (faculties.isEmpty()) {
             throw new UniversityDoesNotHaveFaculties();
         }
         return faculties;
@@ -51,28 +51,11 @@ public class University {
             throw new UniversityDoesNotHaveFaculties();
         }
         assert faculty != null;
-        for (int i = 0; i <= quantity; i++){
+        for (int i = 0; i <= quantity; i++) {
             faculty.addStudent(Student.createStudent(), group);
         }
     }
 
 
-    private void setStudentSubject() throws StudentDoesNotHaveSubject, FacultyDoesNotHaveGroups,
-            UniversityDoesNotHaveFaculties, GroupDoesNotHaveStudent {
-        for (Faculty faculty : getFaculties()) {
-            for (Group group : faculty.getGroupList()) {
-                group.setStudentsSubject();
-            }
-        }
-    }
-
-    private void getAllStudentsList() throws StudentDoesNotHaveSubject, FacultyDoesNotHaveGroups,
-            UniversityDoesNotHaveFaculties, GroupDoesNotHaveStudent {
-        for (Faculty faculty : getFaculties()) {
-            for (Group group : faculty.getGroupList()) {
-                System.out.println(group.getStudents());
-            }
-        }
-    }
 
 }

@@ -11,7 +11,7 @@ public enum Subject {
     DRAWING("Drawing"),
     DESIGN_BASICS("Design basics");
 
-    private String name;
+    private final String name;
 
     public String getName() {
         return name;

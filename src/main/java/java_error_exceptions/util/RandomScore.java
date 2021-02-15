@@ -8,18 +8,18 @@ public class RandomScore {
     public static Random r = new Random();
     public static int randomScore = 4 + r.nextInt(10 - 4 + 1);
 
-    public static List<Integer> randomScoresList = new ArrayList<Integer>();
-    public static List<Integer> randomScoreSet = new ArrayList<>();
+   // public static List<Integer> randomScoresList = new ArrayList<Integer>();
 
     public static List<Integer> fillRandomScoreList() {
+        List<Integer> randomScoresList = new ArrayList<>();
         for (int i = 0; i <= 10; i++) {
-            randomScoreSet.add(4 + r.nextInt(10 - 4 + 1));
+            randomScoresList.add(4 + r.nextInt(10 - 4 + 1));
         }
-        return randomScoreSet;
+        return randomScoresList;
     }
 
 
-    public static List<Integer> getListOfScores() {
+    public static List<Integer> getListOfScores(List<Integer> randomScoresList) {
         for (int i = 0; i < 20; i++) {
             randomScoresList.add(4 + r.nextInt(10 - 4 + 1));
         }
@@ -38,15 +38,17 @@ public class RandomScore {
     }
 
     public static void main(String[] args) {
-       // System.out.println(randomScore);
+        // System.out.println(randomScore);
 
-      //  System.out.println(getListOfScores());
-      //  System.out.println(averageScore(randomScoresList));
-Student student = new Student();
+        //  System.out.println(getListOfScores());
+        //  System.out.println(averageScore(randomScoresList));
+        Student student = new Student("name", "surname", fillRandomScoreList());
+        Student student1 = new Student("name", "surname", fillRandomScoreList());
+        System.out.println(student.getScoreList());
+        System.out.println(student1.getScoreList());
 
 
-        //System.out.println(student.setScoreList(fillRandomScoreList()));
+
+
     }
-
-
 }

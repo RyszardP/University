@@ -1,33 +1,72 @@
 package java_error_exceptions.classes;
 
+import java_error_exceptions.exceptions.ScoresMustBeInRange;
+import java_error_exceptions.exceptions.StudentDoesNotHaveSubject;
 import java_error_exceptions.util.RandomNames;
 import java_error_exceptions.util.RandomScore;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+
+import java.util.*;
 
 
 public class Student {
+    private static long studentsCount = 0;
+
     private String name;
     private String secondName;
+    private long StudentId;
     private List<Integer> scoreList;
-    private HashMap<Subject, Set<Integer>> subjectScoreSet = new HashMap<>();
-    private List<Subject> subjectList = new ArrayList<Subject>();
-
-    public Student() {
-    }
-
-    public Student(String name, String secondName) {
-        this.name = name;
-        this.secondName = secondName;
-    }
-
+    private EnumSet<Subject> subjects;
+    private Score scores;
 
     public Student(String name, String secondName, List<Integer> scoreList) {
         this.name = name;
         this.secondName = secondName;
         this.scoreList = scoreList;
+    }
+
+    public Student(String name, String secondName, EnumSet<Subject> subjects) {
+        this.name = name;
+        this.secondName = secondName;
+        this.subjects = subjects;
+        scores = new Score();
+        studentsCount++;
+    }
+
+    public class Score {
+        private EnumMap<Subject, List<Integer>> subjectScore = new EnumMap<>(Subject.class);
+
+        public Score() {
+            for (Subject subject : subjects) {
+                subjectScore.put(subject, new ArrayList<>());
+            }
+        }
+
+        public EnumMap<Subject, List<Integer>> getSubjectScore() {
+            return subjectScore;
+        }
+
+
+        private void setSubject(Subject subject) {
+            if (subjects.contains(subject)) {
+                subjectScore.put(subject, new ArrayList<>());
+            }
+        }
+
+        private void setScore(Subject subject, int score)
+                throws ScoresMustBeInRange {
+            if ((score >= 0) && (score <= 10)) {
+                List<Integer> grades = subjectScore.get(subject);
+                grades.add(score);
+                subjectScore.put(subject, grades);
+            } else {
+                throw new ScoresMustBeInRange("Score " + score + " invalid value");
+            }
+        }
+
+        @Override
+        public String toString() {
+            return subjectScore.toString();
+        }
     }
 
     public String getName() {
@@ -46,71 +85,62 @@ public class Student {
         this.secondName = secondName;
     }
 
-    public HashMap<Subject, Set<Integer>> getSubjectScoreSet() {
-        return subjectScoreSet;
+    public long getStudentId() {
+        return StudentId;
     }
 
-    public List<Subject> getSubjectList() {
-        return subjectList;
-    }
-
-    public void setSubjectScoreSet(HashMap<Subject, Set<Integer>> subjectScoreSet) {
-        this.subjectScoreSet = subjectScoreSet;
-    }
-
-    public void setSubjectList(List<Subject> subjectList) {
-        this.subjectList = subjectList;
-    }
-
-    public void setSubjects(List<Subject> subjects) {
-        this.subjectList = subjects;
+    public void setStudentId(long studentId) {
+        StudentId = studentId;
     }
 
     public List<Integer> getScoreList() {
         return scoreList;
     }
 
-    public void setScoreList(List<Integer> scoreList) {
-        this.scoreList = scoreList;
+    public EnumSet<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubject(Subject subject) {
+      subjects.add(subject);
+      scores.setSubject(subject);
+    }
+
+    public void setScore(Subject subject, int score) throws ScoresMustBeInRange, StudentDoesNotHaveSubject {
+        if(!getSubjects().contains(subject)){
+            setSubject(subject);
+        }
+        scores.setScore(subject,score);
+    }
+
+    public Score getScores() {
+        return scores;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Student student = (Student) o;
-
-        if (name != null ? !name.equals(student.name) : student.name != null) return false;
-        if (secondName != null ? !secondName.equals(student.secondName) : student.secondName != null) return false;
-        return subjectList != null ? subjectList.equals(student.subjectList) : student.subjectList == null;
+        return StudentId == student.StudentId;
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (secondName != null ? secondName.hashCode() : 0);
-        result = 31 * result + (subjectList != null ? subjectList.hashCode() : 0);
-        return result;
+        return Objects.hash(StudentId);
     }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", subjectList=" + subjectList +
-                '}';
-    }
-
 
     public static Student createStudent() {
-        Student student = new Student(RandomNames.getRandomName(), RandomNames.getRandomSecondName(), RandomScore.fillRandomScoreList());
+        Student student = new Student(RandomNames.getRandomName(), RandomNames.getRandomSecondName(),
+                RandomScore.fillRandomScoreList());
         return student;
     }
 
     public static void main(String[] args) {
         System.out.println(createStudent().getScoreList());
+        System.out.println(createStudent().getScoreList());
     }
+
+
 
 }

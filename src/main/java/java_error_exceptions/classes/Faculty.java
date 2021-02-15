@@ -1,18 +1,16 @@
 package java_error_exceptions.classes;
 
-import java.util.List;
+import java_error_exceptions.exceptions.FacultyDoesNotHaveGroups;
+
+import java.util.*;
 
 public class Faculty {
     private String FacultyName;
-    private List<Group> groupList;
+    private Set<Group> groups;
 
     public Faculty(String facultyName) {
         FacultyName = facultyName;
-    }
-
-    public Faculty(String facultyName, List<Group> groupList) {
-        FacultyName = facultyName;
-        this.groupList = groupList;
+        groups = new TreeSet<>();
     }
 
     public String getFacultyName() {
@@ -23,41 +21,44 @@ public class Faculty {
         FacultyName = facultyName;
     }
 
-    public List<Group> getGroupList() {
-        return groupList;
+    public Set<Group> getGroups() throws FacultyDoesNotHaveGroups {
+        if(groups.isEmpty()){
+            throw new FacultyDoesNotHaveGroups("The faculty" + getFacultyName() + " is empty");
+        }
+        return groups;
     }
 
-    public void setGroupList(List<Group> groupList) {
-        this.groupList = groupList;
+    public void setGroup(String groupName) {
+        groups.add(new Group(groupName));
+    }
+
+    public Group getGroup(String groupName) throws FacultyDoesNotHaveGroups {
+        Optional<Group> optionalGroup = getGroups().stream().
+                filter(group -> group.getGroupName().equals(groupName)).findFirst();
+
+        return optionalGroup.orElse(null);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Faculty faculty = (Faculty) o;
-
-        if (FacultyName != null ? !FacultyName.equals(faculty.FacultyName) : faculty.FacultyName != null) return false;
-        return groupList != null ? groupList.equals(faculty.groupList) : faculty.groupList == null;
+        return FacultyName.equals(faculty.FacultyName);
     }
 
     @Override
     public int hashCode() {
-        int result = FacultyName != null ? FacultyName.hashCode() : 0;
-        result = 31 * result + (groupList != null ? groupList.hashCode() : 0);
-        return result;
+        return Objects.hash(FacultyName);
     }
 
     @Override
     public String toString() {
-        return "Faculty{" +
-                "FacultyName='" + FacultyName + '\'' +
-                ", groupList=" + groupList +
-                '}';
+        final StringBuilder sb = new StringBuilder("Faculty{");
+        sb.append("FacultyName='").append(FacultyName).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 
-   public void  addStudent(Student student,Group group) {
-        group.addStudent(student);
-   }
+
 }
