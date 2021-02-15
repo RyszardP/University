@@ -41,7 +41,6 @@ public class University {
             throw new UniversityDoesNotHaveFaculties();
         }
         assert faculty != null;
-        faculty.addStudent(Student.createStudent(), group);
     }
 
     public void addRandomStudentQuantity(Faculty faculty, Group group, int quantity) throws UniversityDoesNotHaveFaculties,
@@ -51,9 +50,6 @@ public class University {
             throw new UniversityDoesNotHaveFaculties();
         }
         assert faculty != null;
-        for (int i = 0; i <= quantity; i++) {
-            faculty.addStudent(Student.createStudent(), group);
-        }
     }
 
 

@@ -131,14 +131,8 @@ public class Student {
     }
 
     public static Student createStudent() {
-        Student student = new Student(RandomNames.getRandomName(), RandomNames.getRandomSecondName(),
+        return new Student(RandomNames.getRandomName(), RandomNames.getRandomSecondName(),
                 RandomScore.fillRandomScoreList());
-        return student;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(createStudent().getScoreList());
-        System.out.println(createStudent().getScoreList());
     }
 
 

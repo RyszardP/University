@@ -1,18 +1,12 @@
 package java_error_exceptions;
 
 import java_error_exceptions.classes.*;
-import java_error_exceptions.exceptions.FacultyDoesNotHaveGroups;
 import java_error_exceptions.exceptions.GroupDoesNotHaveStudent;
-import java_error_exceptions.exceptions.StudentDoesNotHaveSubject;
-import java_error_exceptions.exceptions.UniversityDoesNotHaveFaculties;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class Main {
 
-    public static void main(String[] args) throws GroupDoesNotHaveStudent {
+    public static void main(String[] args)  {
         University university = new University("Hogwarts");
         Faculty facultyGryffindor = new Faculty("Gryffindor");
         Faculty facultySlytherin = new Faculty("Slytherin");
@@ -27,47 +21,9 @@ public class Main {
         Group firstRavenclawGroup = new Group("1 Ravenclaw group");
         Group secondRavenclawGroup = new Group("2 Ravenclaw group");
 
-        try {
-            university.setFaculties(new ArrayList<>(Arrays.asList(facultyGryffindor, facultySlytherin,
-                    facultyHufflepuff, facultyRavenclaw)));
-
-            facultyGryffindor.setGroupList(new ArrayList<>(Arrays.asList(firstGryffindorGroup, secondGryffindorGroup)));
-            facultySlytherin.setGroupList(new ArrayList<>(Arrays.asList(firstSlytherinGroup, secondSlytherinGroup)));
-            facultyHufflepuff.setGroupList(new ArrayList<>(Arrays.asList(firstHufflepuffGroup, secondHufflepuffGroup)));
-            facultyRavenclaw.setGroupList(new ArrayList<>(Arrays.asList(firstRavenclawGroup, secondRavenclawGroup)));
-
-            university.addRandomStudentQuantity(facultyGryffindor, firstGryffindorGroup, 20);
-            university.addRandomStudentQuantity(facultyGryffindor, secondGryffindorGroup, 20);
-            university.addRandomStudentQuantity(facultySlytherin, firstSlytherinGroup, 20);
-            university.addRandomStudentQuantity(facultySlytherin, secondSlytherinGroup, 20);
-            university.addRandomStudentQuantity(facultyHufflepuff, firstHufflepuffGroup, 20);
-            university.addRandomStudentQuantity(facultyHufflepuff, secondHufflepuffGroup, 20);
-            university.addRandomStudentQuantity(facultyRavenclaw, firstRavenclawGroup, 20);
-            university.addRandomStudentQuantity(facultyRavenclaw, secondRavenclawGroup, 20);
-
-
-        } catch (UniversityDoesNotHaveFaculties | GroupDoesNotHaveStudent | StudentDoesNotHaveSubject | FacultyDoesNotHaveGroups e) {
-            e.printStackTrace();
-        }
         //  return university;
-        printStudents(university);
+      //  printStudents(university);
     }
 
-    public static void printStudents(University university) throws GroupDoesNotHaveStudent {
-        try {
-            for (Faculty faculty : university.getFaculties()) {
-                for (Group group : faculty.getGroupList()) {
-                    for (Student student : group.getStudents()) {
-                        System.out.println("faculty title: " + faculty.getFacultyName() + ", Group name: " +
-                                group.getGroupName() + ", Student name and second name: " + student.getName() + " " +
-                                student.getSecondName() +
-                                ", Score list" + student.getScoreList());
-                    }
-                }
-            }
-        } catch (UniversityDoesNotHaveFaculties e) {
-            e.printStackTrace();
-        }
-    }
 
 }

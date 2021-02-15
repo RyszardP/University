@@ -38,10 +38,7 @@ public class RandomScore {
     }
 
     public static void main(String[] args) {
-        // System.out.println(randomScore);
 
-        //  System.out.println(getListOfScores());
-        //  System.out.println(averageScore(randomScoresList));
         Student student = new Student("name", "surname", fillRandomScoreList());
         Student student1 = new Student("name", "surname", fillRandomScoreList());
         System.out.println(student.getScoreList());
