@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public class UniversityUtil extends Calculations {
 
-    private static Student searchStudentById(University university, long studentId) throws UniversityDoesNotHaveFaculties,
-            GroupDoesNotHaveStudent, FacultyDoesNotHaveGroups, StudentDoesNotHaveSubject, NoStudentWithIdException {
+    private static Student searchStudentById(University university, long studentId) throws UniversityDoesNotHaveFacultiesException,
+            GroupDoesNotHaveStudentException, FacultyDoesNotHaveGroupsException, StudentDoesNotHaveSubjectException, NoStudentWithIdException {
         Student student;
         for (Faculty faculty : university.getFaculties()) {
             if ((student = FacultyUtil.searchStudent(faculty, studentId)) != null) {
@@ -21,8 +21,8 @@ public class UniversityUtil extends Calculations {
     }
 
     public static Double getAverageScoreOfFaculty(University university, String facultyName, Subject subject)
-            throws FacultyDoesNotHaveGroups, StudentDoesNotHaveSubject, GroupDoesNotHaveStudent,
-            UniversityDoesNotHaveFaculties, NoFacultyWithNameException {
+            throws FacultyDoesNotHaveGroupsException, StudentDoesNotHaveSubjectException, GroupDoesNotHaveStudentException,
+            UniversityDoesNotHaveFacultiesException, NoFacultyWithNameException {
         Faculty facultyByName;
         Optional<Faculty> optionalFaculty = university.getFaculties().stream().
                 filter(faculty -> faculty.getFacultyName().equals(facultyName)).findFirst();
@@ -35,7 +35,7 @@ public class UniversityUtil extends Calculations {
     }
 
     private static Group searchGroupByName(University university, String groupName) throws
-            UniversityDoesNotHaveFaculties, FacultyDoesNotHaveGroups {
+            UniversityDoesNotHaveFacultiesException, FacultyDoesNotHaveGroupsException {
         for (Faculty faculty : university.getFaculties()) {
             if (FacultyUtil.hasGroup(faculty, groupName)) {
                 return faculty.getGroup(groupName);
@@ -45,8 +45,8 @@ public class UniversityUtil extends Calculations {
     }
 
     public static Double getAverageScoreOfGroup(University university, String groupName, Subject subject)
-            throws GroupDoesNotHaveStudent, StudentDoesNotHaveSubject,
-           UniversityDoesNotHaveFaculties, FacultyDoesNotHaveGroups{
+            throws GroupDoesNotHaveStudentException, StudentDoesNotHaveSubjectException,
+            UniversityDoesNotHaveFacultiesException, FacultyDoesNotHaveGroupsException {
         Group group;
         Double averageGrade = 0.0;
 
@@ -56,8 +56,8 @@ public class UniversityUtil extends Calculations {
         return averageGrade;
     }
 
-    public static List<Student> getStudentsOfUniversity(University university) throws FacultyDoesNotHaveGroups,
-            GroupDoesNotHaveStudent, UniversityDoesNotHaveFaculties {
+    public static List<Student> getStudentsOfUniversity(University university) throws FacultyDoesNotHaveGroupsException,
+            GroupDoesNotHaveStudentException, UniversityDoesNotHaveFacultiesException {
         ArrayList<Student> students = new ArrayList<>();
         for (Faculty faculty : university.getFaculties()) {
             students.addAll(FacultyUtil.getStudentsOfFaculty(faculty));
@@ -66,8 +66,8 @@ public class UniversityUtil extends Calculations {
     }
 
     public static Double getAverageScoreOfUniversity(University university, Subject subject)
-            throws GroupDoesNotHaveStudent, StudentDoesNotHaveSubject,
-            FacultyDoesNotHaveGroups, UniversityDoesNotHaveFaculties {
+            throws GroupDoesNotHaveStudentException, StudentDoesNotHaveSubjectException,
+            FacultyDoesNotHaveGroupsException, UniversityDoesNotHaveFacultiesException {
         return averageSubjectScore(getStudentsOfUniversity(university), subject);
     }
 }

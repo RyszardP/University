@@ -2,14 +2,14 @@ package java_error_exceptions.util;
 
 import java_error_exceptions.classes.Student;
 import java_error_exceptions.classes.Subject;
-import java_error_exceptions.exceptions.StudentDoesNotHaveSubject;
+import java_error_exceptions.exceptions.StudentDoesNotHaveSubjectException;
 
 import java.util.List;
 
 
 public class Calculations {
 
-    public static double averageSubjectScore(List<Student> students, Subject subject) throws StudentDoesNotHaveSubject {
+    public static double averageSubjectScore(List<Student> students, Subject subject) throws StudentDoesNotHaveSubjectException {
         Double averageScore = 0.0;
         int scoreCount = 0;
         for (Student student : students) {

@@ -1,6 +1,6 @@
 package java_error_exceptions.classes;
 
-import java_error_exceptions.exceptions.FacultyDoesNotHaveGroups;
+import java_error_exceptions.exceptions.FacultyDoesNotHaveGroupsException;
 
 import java.util.*;
 
@@ -21,9 +21,9 @@ public class Faculty {
         FacultyName = facultyName;
     }
 
-    public Set<Group> getGroups() throws FacultyDoesNotHaveGroups {
+    public Set<Group> getGroups() throws FacultyDoesNotHaveGroupsException {
         if(groups.isEmpty()){
-            throw new FacultyDoesNotHaveGroups("The faculty" + getFacultyName() + " is empty");
+            throw new FacultyDoesNotHaveGroupsException("The faculty" + getFacultyName() + " is empty");
         }
         return groups;
     }
@@ -32,7 +32,7 @@ public class Faculty {
         groups.add(new Group(groupName));
     }
 
-    public Group getGroup(String groupName) throws FacultyDoesNotHaveGroups {
+    public Group getGroup(String groupName) throws FacultyDoesNotHaveGroupsException {
         Optional<Group> optionalGroup = getGroups().stream().
                 filter(group -> group.getGroupName().equals(groupName)).findFirst();
 

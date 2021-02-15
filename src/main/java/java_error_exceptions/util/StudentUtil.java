@@ -2,7 +2,7 @@ package java_error_exceptions.util;
 
 import java_error_exceptions.classes.Student;
 import java_error_exceptions.classes.Subject;
-import java_error_exceptions.exceptions.StudentDoesNotHaveSubject;
+import java_error_exceptions.exceptions.StudentDoesNotHaveSubjectException;
 
 import java.util.EnumMap;
 import java.util.LinkedList;
@@ -14,13 +14,13 @@ public class StudentUtil extends Calculations {
         return student.getScores().getSubjectScore().get(subject);
     }
 
-    public static double getAverageBySubject(Student student, Subject subject) throws StudentDoesNotHaveSubject {
+    public static double getAverageBySubject(Student student, Subject subject) throws StudentDoesNotHaveSubjectException {
         LinkedList<Student> studentList = new LinkedList<>();
         studentList.add(student);
         return averageSubjectScore(studentList, subject);
     }
 
-    public static EnumMap<Subject, Double> getAverageScore(Student student) throws StudentDoesNotHaveSubject {
+    public static EnumMap<Subject, Double> getAverageScore(Student student) throws StudentDoesNotHaveSubjectException {
         EnumMap<Subject, Double> averageScores = new EnumMap<>(Subject.class);
 
         for(Subject subject : student.getSubjects()){

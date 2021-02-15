@@ -1,7 +1,7 @@
 package java_error_exceptions.classes;
 
-import java_error_exceptions.exceptions.ScoresMustBeInRange;
-import java_error_exceptions.exceptions.StudentDoesNotHaveSubject;
+import java_error_exceptions.exceptions.ScoresMustBeInRangeException;
+import java_error_exceptions.exceptions.StudentDoesNotHaveSubjectException;
 import java_error_exceptions.util.RandomNames;
 import java_error_exceptions.util.RandomScore;
 
@@ -53,13 +53,13 @@ public class Student {
         }
 
         private void setScore(Subject subject, int score)
-                throws ScoresMustBeInRange {
+                throws ScoresMustBeInRangeException {
             if ((score >= 0) && (score <= 10)) {
                 List<Integer> grades = subjectScore.get(subject);
                 grades.add(score);
                 subjectScore.put(subject, grades);
             } else {
-                throw new ScoresMustBeInRange("Score " + score + " invalid value");
+                throw new ScoresMustBeInRangeException("Score " + score + " invalid value");
             }
         }
 
@@ -106,7 +106,7 @@ public class Student {
       scores.setSubject(subject);
     }
 
-    public void setScore(Subject subject, int score) throws ScoresMustBeInRange, StudentDoesNotHaveSubject {
+    public void setScore(Subject subject, int score) throws ScoresMustBeInRangeException, StudentDoesNotHaveSubjectException {
         if(!getSubjects().contains(subject)){
             setSubject(subject);
         }
@@ -134,7 +134,5 @@ public class Student {
         return new Student(RandomNames.getRandomName(), RandomNames.getRandomSecondName(),
                 RandomScore.fillRandomScoreList());
     }
-
-
 
 }

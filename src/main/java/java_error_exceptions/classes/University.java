@@ -23,9 +23,9 @@ public class University {
         this.title = title;
     }
 
-    public List<Faculty> getFaculties() throws UniversityDoesNotHaveFaculties {
+    public List<Faculty> getFaculties() throws UniversityDoesNotHaveFacultiesException {
         if (faculties.isEmpty()) {
-            throw new UniversityDoesNotHaveFaculties();
+            throw new UniversityDoesNotHaveFacultiesException();
         }
         return faculties;
     }
@@ -34,20 +34,20 @@ public class University {
         this.faculties = faculties;
     }
 
-    public void addRandomStudent(Faculty faculty, Group group) throws UniversityDoesNotHaveFaculties,
-            GroupDoesNotHaveStudent, StudentDoesNotHaveSubject, FacultyDoesNotHaveGroups {
+    public void addRandomStudent(Faculty faculty, Group group) throws UniversityDoesNotHaveFacultiesException,
+            GroupDoesNotHaveStudentException, StudentDoesNotHaveSubjectException, FacultyDoesNotHaveGroupsException {
         boolean isHasDepartment = getFaculties().contains(faculty);
         if ((faculty == null) && !isHasDepartment) {
-            throw new UniversityDoesNotHaveFaculties();
+            throw new UniversityDoesNotHaveFacultiesException();
         }
         assert faculty != null;
     }
 
-    public void addRandomStudentQuantity(Faculty faculty, Group group, int quantity) throws UniversityDoesNotHaveFaculties,
-            GroupDoesNotHaveStudent, StudentDoesNotHaveSubject, FacultyDoesNotHaveGroups {
+    public void addRandomStudentQuantity(Faculty faculty, Group group, int quantity) throws UniversityDoesNotHaveFacultiesException,
+            GroupDoesNotHaveStudentException, StudentDoesNotHaveSubjectException, FacultyDoesNotHaveGroupsException {
         boolean isHasDepartment = getFaculties().contains(faculty);
         if ((faculty == null) && !isHasDepartment) {
-            throw new UniversityDoesNotHaveFaculties();
+            throw new UniversityDoesNotHaveFacultiesException();
         }
         assert faculty != null;
     }

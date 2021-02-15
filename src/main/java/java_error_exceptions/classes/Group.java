@@ -1,6 +1,6 @@
 package java_error_exceptions.classes;
 
-import java_error_exceptions.exceptions.GroupDoesNotHaveStudent;
+import java_error_exceptions.exceptions.GroupDoesNotHaveStudentException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +24,9 @@ public class Group {
     }
 
 
-    public List<Student> getStudents() throws GroupDoesNotHaveStudent {
+    public List<Student> getStudents() throws GroupDoesNotHaveStudentException {
         if (students.isEmpty()) {
-            throw new GroupDoesNotHaveStudent("The group " + getGroupName() + " is empty");
+            throw new GroupDoesNotHaveStudentException("The group " + getGroupName() + " is empty");
         }
         return students;
     }
