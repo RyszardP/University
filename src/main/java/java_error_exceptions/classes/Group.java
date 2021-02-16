@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Group {
+public class Group implements Comparable<Group> {
     private List<Student> students;
     private String groupName;
 
@@ -35,6 +35,13 @@ public class Group {
         students.add(student);
     }
 
+    public void setRandomStudents(Student student, int count) throws GroupDoesNotHaveStudentException {
+        for (int i = 0; i <= count; i++) {
+            students.add(Student.createStudent());
+
+        }
+    }
+
     public void addRandomStudent() {
         students.add(Student.createStudent());
     }
@@ -61,4 +68,8 @@ public class Group {
     }
 
 
+    @Override
+    public int compareTo(Group o) {
+        return groupName.compareTo(o.groupName);
+    }
 }

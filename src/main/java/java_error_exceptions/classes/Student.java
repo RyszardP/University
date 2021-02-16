@@ -3,7 +3,6 @@ package java_error_exceptions.classes;
 import java_error_exceptions.exceptions.ScoresMustBeInRangeException;
 import java_error_exceptions.exceptions.StudentDoesNotHaveSubjectException;
 import java_error_exceptions.util.RandomNames;
-import java_error_exceptions.util.RandomScore;
 
 import java.util.*;
 
@@ -17,6 +16,9 @@ public class Student {
     private List<Integer> scoreList;
     private EnumSet<Subject> subjects;
     private Score scores;
+
+    public Student() {
+    }
 
     public Student(String name, String secondName, List<Integer> scoreList) {
         this.name = name;
@@ -132,7 +134,7 @@ public class Student {
 
     public static Student createStudent() {
         return new Student(RandomNames.getRandomName(), RandomNames.getRandomSecondName(),
-                RandomScore.fillRandomScoreList());
+                EnumSet.of(Subject.getRandomSubject(),Subject.getRandomSubject(),Subject.getRandomSubject()));
     }
 
 }

@@ -2,7 +2,11 @@ package java_error_exceptions.classes;
 
 import java_error_exceptions.exceptions.FacultyDoesNotHaveGroupsException;
 
-import java.util.*;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
+
 
 public class Faculty {
     private String FacultyName;
@@ -35,7 +39,6 @@ public class Faculty {
     public Group getGroup(String groupName) throws FacultyDoesNotHaveGroupsException {
         Optional<Group> optionalGroup = getGroups().stream().
                 filter(group -> group.getGroupName().equals(groupName)).findFirst();
-
         return optionalGroup.orElse(null);
     }
 
