@@ -1,14 +1,12 @@
 package java_error_exceptions.util;
 
-import java_error_exceptions.classes.Student;
+import java_error_exceptions.entity.Student;
 
 import java.util.*;
 
 public class RandomScore {
     public static Random r = new Random();
     public static int randomScore = 4 + r.nextInt(10 - 4 + 1);
-
-   // public static List<Integer> randomScoresList = new ArrayList<Integer>();
 
     public static List<Integer> fillRandomScoreList() {
         List<Integer> randomScoresList = new ArrayList<>();
@@ -38,11 +36,6 @@ public class RandomScore {
     }
 
     public static void main(String[] args) {
-
-        Student student = new Student("name", "surname", fillRandomScoreList());
-        Student student1 = new Student("name", "surname", fillRandomScoreList());
-        System.out.println(student.getScoreList());
-        System.out.println(student1.getScoreList());
 
 
 

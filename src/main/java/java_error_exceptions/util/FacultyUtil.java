@@ -1,9 +1,9 @@
 package java_error_exceptions.util;
 
-import java_error_exceptions.classes.Faculty;
-import java_error_exceptions.classes.Group;
-import java_error_exceptions.classes.Student;
-import java_error_exceptions.classes.Subject;
+import java_error_exceptions.entity.Faculty;
+import java_error_exceptions.entity.Group;
+import java_error_exceptions.entity.Student;
+import java_error_exceptions.entity.Subject;
 import java_error_exceptions.exceptions.FacultyDoesNotHaveGroupsException;
 import java_error_exceptions.exceptions.GroupDoesNotHaveStudentException;
 import java_error_exceptions.exceptions.StudentDoesNotHaveSubjectException;

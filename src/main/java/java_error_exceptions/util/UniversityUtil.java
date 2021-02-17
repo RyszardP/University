@@ -1,6 +1,6 @@
 package java_error_exceptions.util;
 
-import java_error_exceptions.classes.*;
+import java_error_exceptions.entity.*;
 import java_error_exceptions.exceptions.*;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.Optional;
 public class UniversityUtil extends Calculations {
 
     private static Student searchStudentById(University university, long studentId) throws UniversityDoesNotHaveFacultiesException,
-            GroupDoesNotHaveStudentException, FacultyDoesNotHaveGroupsException, StudentDoesNotHaveSubjectException, NoStudentWithIdException {
+            GroupDoesNotHaveStudentException, FacultyDoesNotHaveGroupsException, NoStudentWithIdException {
         Student student;
         for (Faculty faculty : university.getFaculties()) {
             if ((student = FacultyUtil.searchStudent(faculty, studentId)) != null) {
@@ -29,7 +29,7 @@ public class UniversityUtil extends Calculations {
         if (optionalFaculty.isPresent()) {
             facultyByName = optionalFaculty.get();
         } else {
-            throw new NoFacultyWithNameException("В университете отсутствует факультет с именем " + facultyName);
+            throw new NoFacultyWithNameException("Faculty with such name doesn`t exist " + facultyName);
         }
         return FacultyUtil.getAverageScoreBySubject(facultyByName, subject);
     }
@@ -70,4 +70,19 @@ public class UniversityUtil extends Calculations {
             FacultyDoesNotHaveGroupsException, UniversityDoesNotHaveFacultiesException {
         return averageSubjectScore(getStudentsOfUniversity(university), subject);
     }
+
+    public static void getStudentList(University university) throws UniversityDoesNotHaveFacultiesException,
+            FacultyDoesNotHaveGroupsException, GroupDoesNotHaveStudentException {
+        for (Faculty faculty : university.getFaculties()) {
+            for (Group group : faculty.getGroups()) {
+                for (Student student : group.getStudents()) {
+                    System.out.println(student.getName() + " " + student.getSecondName() + " "
+                            + student.getStudentId() + " "
+                            + student.getScores().getSubjectScore());
+
+                }
+            }
+        }
+    }
+
 }
