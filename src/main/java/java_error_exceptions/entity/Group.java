@@ -1,13 +1,12 @@
 package java_error_exceptions.entity;
 
 import java_error_exceptions.exceptions.GroupDoesNotHaveStudentException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Group implements Comparable<Group> {
-    private List<Student> students;
+    private final List<Student> students;
     private String groupName;
 
     public Group(String groupName) {
@@ -35,16 +34,12 @@ public class Group implements Comparable<Group> {
         students.add(student);
     }
 
-    public void setRandomStudents(Student student, int count) throws GroupDoesNotHaveStudentException {
+    public void setRandomStudents(Student student, int count) {
         for (int i = 0; i <= count; i++) {
             students.add(Student.createStudent());
-
         }
     }
 
-    public void addRandomStudent() {
-        students.add(Student.createStudent());
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -61,12 +56,9 @@ public class Group implements Comparable<Group> {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Group{");
-        sb.append("groupName='").append(groupName).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Group{" + "groupName='" + groupName + '\'' +
+                '}';
     }
-
 
     @Override
     public int compareTo(Group o) {

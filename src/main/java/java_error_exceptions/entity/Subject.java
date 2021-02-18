@@ -32,9 +32,6 @@ public enum Subject {
 
     public static Subject getRandomSubject(){
         return values()[(int) (Math.random() * values().length)];
-
     }
-
-
 
 }

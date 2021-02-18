@@ -1,11 +1,9 @@
 package java_error_exceptions.entity;
 
 import java_error_exceptions.exceptions.ScoresMustBeInRangeException;
-import java_error_exceptions.exceptions.StudentDoesNotHaveSubjectException;
 import java_error_exceptions.util.RandomNames;
 
 import java.util.*;
-
 
 public class Student {
     private static long studentsCount = 0;
@@ -30,7 +28,7 @@ public class Student {
     }
 
     public class Score {
-        private EnumMap<Subject, List<Integer>> subjectScore = new EnumMap<>(Subject.class);
+        private final EnumMap<Subject, List<Integer>> subjectScore = new EnumMap<>(Subject.class);
 
         public Score() {
             for (Subject subject : subjects) {

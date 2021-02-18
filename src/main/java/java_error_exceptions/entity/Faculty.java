@@ -1,16 +1,14 @@
 package java_error_exceptions.entity;
 
 import java_error_exceptions.exceptions.FacultyDoesNotHaveGroupsException;
-
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
-
 public class Faculty {
     private String FacultyName;
-    private Set<Group> groups;
+    private final Set<Group> groups;
 
     public Faculty(String facultyName) {
         FacultyName = facultyName;
@@ -57,11 +55,7 @@ public class Faculty {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Faculty{");
-        sb.append("FacultyName='").append(FacultyName).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Faculty{" + "FacultyName='" + FacultyName + '\'' +
+                '}';
     }
-
-
 }
