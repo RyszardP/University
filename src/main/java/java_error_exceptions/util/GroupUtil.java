@@ -22,7 +22,7 @@ public class GroupUtil extends Calculations {
     }
 
     public static Double getAverageScoreBySubject(Group group, Subject subject)
-            throws GroupDoesNotHaveStudentException, StudentDoesNotHaveSubjectException {
+            throws GroupDoesNotHaveStudentException{
         return averageSubjectScore(group.getStudents(),subject);
     }
 }

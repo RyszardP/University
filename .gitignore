@@ -8,6 +8,7 @@
 /target/*
 /httpRequests/
 /.idea/*
+/.idea/*.xml
 # Compiled class file
 *.class
 

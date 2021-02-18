@@ -46,7 +46,7 @@ public class FacultyUtil extends Calculations {
     }
 
     public static Double getAverageScoreBySubject(Faculty faculty, Subject subject) throws GroupDoesNotHaveStudentException,
-            FacultyDoesNotHaveGroupsException, StudentDoesNotHaveSubjectException {
+            FacultyDoesNotHaveGroupsException {
         return averageSubjectScore(getStudentsOfFaculty(faculty),subject);
     }
 }

@@ -6,7 +6,6 @@ import java.util.*;
 
 public class RandomScore {
     public static Random r = new Random();
-    public static int randomScore = 4 + r.nextInt(10 - 4 + 1);
 
     public static List<Integer> fillRandomScoreList() {
         List<Integer> randomScoresList = new ArrayList<>();
