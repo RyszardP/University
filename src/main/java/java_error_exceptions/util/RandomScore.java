@@ -16,7 +16,6 @@ public class RandomScore {
         return randomScoresList;
     }
 
-
     public static List<Integer> getListOfScores(List<Integer> randomScoresList) {
         for (int i = 0; i < 20; i++) {
             randomScoresList.add(4 + r.nextInt(10 - 4 + 1));
@@ -33,12 +32,5 @@ public class RandomScore {
             return sum.doubleValue() / randomScoresList.size();
         }
         return sum;
-    }
-
-    public static void main(String[] args) {
-
-
-
-
     }
 }

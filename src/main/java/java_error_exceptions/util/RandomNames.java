@@ -23,8 +23,5 @@ public class RandomNames {
     public static String getRandomSecondName(){
         return secondName[new Random().nextInt(secondName.length)];
     }
-    public static void main(String[] args) {
 
-        System.out.println(getRandomName() + " " + getRandomSecondName());
-    }
 }
